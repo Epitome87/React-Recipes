@@ -25,7 +25,7 @@ export function MealRecommendation() {
   //This should be returning UI component with some spinner.
   if (loading)
     return (
-      <Stack direction="row">
+      <Flex>
         <Text>Finding recommendation tailored to you! </Text>
         <Spinner
           thickness="4px"
@@ -34,7 +34,7 @@ export function MealRecommendation() {
           color="blue.500"
           size="lg"
         />
-      </Stack>
+      </Flex>
     );
 
   return (
@@ -46,7 +46,8 @@ export function MealRecommendation() {
           boxShadow={'xl'}
           background={`linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35)), url('${data.results[0].image}')`}
           p={8}
-          w={600}
+          w="90vw"
+          maxW={600}
           h={200}
           backgroundSize="cover"
           backgroundPosition={'center'}

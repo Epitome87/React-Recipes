@@ -18,6 +18,7 @@ function MealPreview({ recipe }) {
     <ReactLink to={`/recipes/${id}`}>
       <Stack
         key={recipe._id}
+        role="group"
         spacing={1}
         direction="column"
         alignItems="center"
@@ -29,20 +30,27 @@ function MealPreview({ recipe }) {
         borderRadius="3xl"
         boxShadow="xl"
         width="260px"
-        _hover={{ transform: 'scale(1.05)' }}
-        transition={'transform 0.2s ease-in-out'}
+        _hover={{ backgroundColor: 'testYellow' }}
+        transition={'all .2s ease-in-out'}
       >
-        <Image
-          src={recipe.image}
-          alt={recipe.title}
-          boxSize="120px"
-          fit="cover"
-          align="center center"
+        <Box
+          mt="-60px"
           border={'2px solid'}
           borderColor="testYellow"
           borderRadius="full"
-          mt="-60px"
-        />
+          overflow="hidden"
+          boxSize="120px"
+        >
+          <Image
+            src={recipe.image}
+            alt={recipe.title}
+            boxSize="120px"
+            fit="cover"
+            align="center center"
+            transition={'transform 2.0s ease-in-out'}
+            _groupHover={{ transform: 'scale(1.10)' }}
+          />
+        </Box>
 
         <Flex
           flexDir="column"
@@ -54,18 +62,14 @@ function MealPreview({ recipe }) {
             color="white"
             fontWeight="bold"
             textAlign="center"
-            // Limit the Title to one line
-            // maxWidth="90%"
-            // whiteSpace="nowrap"
-            // overflow="hidden"
-            // textOverflow="ellipsis"
             noOfLines="2"
+            _groupHover={{ color: 'black' }}
           >
             {recipe.title}
           </Text>
         </Flex>
 
-        <Box color="testYellow" lineHeight="1">
+        <Box color="testYellow" lineHeight="1" _groupHover={{ color: 'white' }}>
           {/* Calculate how many Star icons we need, based on the difficulty */}
           {Array.apply(null, { length: Math.round(recipe.difficulty) }).map(
             (e, index) => (
@@ -73,7 +77,7 @@ function MealPreview({ recipe }) {
             )
           )}
         </Box>
-        <Flex lineHeight="1" color="textGray">
+        <Flex lineHeight="1" color="textGray" _groupHover={{ color: 'black' }}>
           <Box>{recipe.readyInMinutes} Min</Box>
           <Box mx="1rem">|</Box>
           <Box>{mealDifficultyToString(recipe.difficulty)} Lvl</Box>

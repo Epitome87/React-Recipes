@@ -12,7 +12,7 @@ function ScreenHome() {
     const fetchUserFromDatabase = async () => {
       // Fetch user from our DB! For now, just the first user found
       const fetchedData = await axios.get('http://localhost:5000/api/users');
-      const fetchedUser = fetchedData.data[0];
+      const fetchedUser = fetchedData.data[2];
 
       localStorage.setItem('user', JSON.stringify(fetchedUser));
       setUser(fetchedUser);

@@ -9,6 +9,8 @@ import {
   HStack,
   Image,
   Link,
+  ListItem,
+  OrderedList,
   Spinner,
   Stack,
   Text,
@@ -22,7 +24,8 @@ import useFetch from '../utils/hooks/useFetch';
 function ScreenRecipe() {
   const { recipeId } = useParams();
   const [recipe, isLoading, error] = useFetch(
-    recipeService.getByIdFromServer(recipeId)
+    //recipeService.getByIdFromServer(recipeId)
+    recipeService.getById(recipeId)
   );
   // useFetch(recipeService.getById(recipeId));
   const [currentView, setCurrentView] = useState('ingredients');
@@ -49,6 +52,8 @@ function ScreenRecipe() {
       </Container>
     );
 
+  console.log(recipe);
+
   return (
     <Container
       maxW="container.xl"
@@ -58,7 +63,7 @@ function ScreenRecipe() {
       bgColor="primary"
     >
       <Image src={recipe.image} maxH="250px" borderRadius="lg" />
-      <Heading as="h1" m="4rem 1rem 3rem 1rem">
+      <Heading as="h1" m="4rem 1rem 3rem 1rem" letterSpacing="4px">
         {recipe.title}
       </Heading>
       <HStack gap="5rem" mb="3rem">
@@ -119,20 +124,35 @@ function ScreenRecipe() {
       </ButtonGroup>
 
       <Text dangerouslySetInnerHTML={{ __html: recipe.summary }}></Text>
-      <Link href={recipe.sourceUrl} isExternal>
-        Read Original Article
+      <Link href={recipe.sourceUrl} isExternal my={4} alignSelf="end">
+        Read Original Article &#x27A1;
       </Link>
 
       {currentView === 'instructions' && (
-        <Text dangerouslySetInnerHTML={{ __html: recipe.instructions }}></Text>
+        // <Text dangerouslySetInnerHTML={{ __html: recipe.instructions }}></Text>
+        <OrderedList>
+          {recipe.analyzedInstructions[0].steps.map((step) => (
+            <ListItem>{step.step}</ListItem>
+          ))}
+        </OrderedList>
       )}
 
       {currentView === 'ingredients' && (
-        <Box>
+        <Flex flexWrap="wrap" gap={4}>
           {recipe.extendedIngredients.map((ingredient) => (
-            <Text key={ingredient.id}>{ingredient.original}</Text>
+            <Text
+              key={ingredient.id}
+              // w="150px"
+              // h="150px"
+              py={2}
+              px={4}
+              bg="secondary"
+              borderRadius="xl"
+            >
+              {ingredient.original}
+            </Text>
           ))}
-        </Box>
+        </Flex>
       )}
     </Container>
   );

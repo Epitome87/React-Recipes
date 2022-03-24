@@ -47,7 +47,7 @@ function MealPreview({ recipe }) {
             boxSize="120px"
             fit="cover"
             align="center center"
-            transition={'transform 2.0s ease-in-out'}
+            transition={'transform 0.5s ease-in-out'}
             _groupHover={{ transform: 'scale(1.10)' }}
           />
         </Box>

@@ -4,7 +4,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useFetch from '../utils/hooks/useFetch';
 import { recipeService } from '../api/recipes.service';
-import { Container, Heading, Input, Stack } from '@chakra-ui/react';
+import {
+  Container,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+} from '@chakra-ui/react';
 import { MealPreview } from '../Components/Meal';
 
 function ScreenSearch() {
@@ -26,6 +35,8 @@ function ScreenSearch() {
   // This allows us to not make API calls every keystroke (if we were to use searchTerm above)
   // It also allows us to take the quer in the URL as our initial search term value
   const [searchQuery, setSearchQuery] = useState(query);
+
+  const isError = searchTerm === '';
 
   const fetchRecipeByQuery = async (recipeName) => {
     const fetchedData = await axios.get(
@@ -59,12 +70,22 @@ function ScreenSearch() {
         Search Results Screen
       </Heading>
       <form onSubmit={handleSubmit}>
-        <Input
-          variant="filled"
-          placeholder="Hamburger"
-          value={searchTerm}
-          onChange={handleInputChange}
-        />
+        <FormControl isInvalid={isError} onSubmit={handleSubmit}>
+          <FormLabel htmlFor="search">Recipe Search</FormLabel>
+          <Input
+            id="search"
+            type="text"
+            value={searchTerm}
+            onChange={handleInputChange}
+          />
+          {!isError ? (
+            <FormHelperText>
+              Enter a search term for a recipe you wish to find.
+            </FormHelperText>
+          ) : (
+            <FormErrorMessage>Search term is required.</FormErrorMessage>
+          )}
+        </FormControl>
       </form>
 
       <Stack
@@ -74,7 +95,7 @@ function ScreenSearch() {
         align="center"
         flexWrap="wrap"
         gap={2}
-        mt={20}
+        mt={12}
       >
         {searchedRecipes.map((recipe) => {
           return <MealPreview key={recipe._id} recipe={recipe} />;

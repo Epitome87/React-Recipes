@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MealPreview } from '../../Meal';
-import { Heading, Image, Stack, Text } from '@chakra-ui/react';
+import { Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
 
 function UserProfile({ user }) {
   const [favoriteMeals, setFavoriteMeals] = useState([]);
@@ -14,21 +14,21 @@ function UserProfile({ user }) {
       <Heading as="h1" color="testYellow" my={4} textDecoration="underline">
         {user.name}'s Profile
       </Heading>
-      <Image src={user.image} alt={user.name} />
-      <Text>Favorite Meals {user.favoriteMeals.length}:</Text>
-      <Stack
+      <Image src={user.image} alt={user.name} borderRadius="lg" />
+      <Text mt={10} mb={5} fontSize={'1.5rem'}>
+        Favorite Meals ({user.favoriteMeals.length})
+      </Text>
+      <Flex
         justifyContent="space-around"
-        spacing={4}
         direction="row"
         align="center"
         flexWrap="wrap"
-        gap={2}
-        mt={20}
+        gap={4}
       >
         {favoriteMeals.map((favorite) => (
           <MealPreview recipe={favorite} />
         ))}
-      </Stack>
+      </Flex>
     </React.Fragment>
   );
 }

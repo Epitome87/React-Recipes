@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom';
 import * as mealHelper from '../../../utils/meal';
 
 function UserGreeting({ user }) {
-
   return (
-    <Flex justify="space-between" align="center" my={10}>
+    <Flex
+      flexWrap="wrap-reverse"
+      justify="space-between"
+      align="center"
+      my={10}
+    >
       <Link
         to={`/users/${user._id}`}
         style={{ color: 'inherit', textDecoration: 'inherit' }}
@@ -19,7 +23,13 @@ function UserGreeting({ user }) {
           >
             Hi, {user.name}
           </Heading>
-          <Text color="textFaint" fontWeight="bold" fontSize={'1.75rem'}>
+          <Text
+            color="textFaint"
+            fontWeight="bold"
+            fontSize={'1.75rem'}
+            lineHeight={1}
+            mt={2}
+          >
             {mealHelper.greetingMessage()}
           </Text>
         </Box>

@@ -2,8 +2,15 @@ import React from 'react';
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import * as mealHelper from '../../../utils/meal';
+import { useUser } from '../../../Contexts/UserContext';
 
-function UserGreeting({ user }) {
+function UserGreeting() {
+  const { user } = useUser();
+
+  if (!user) {
+    return <Text>Error Fetching User Data</Text>;
+  }
+
   return (
     <Flex
       flexWrap="wrap-reverse"

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { MealPreview } from '../../Meal';
-import { Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
+import { Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { useUser } from '../../../Contexts/UserContext';
 
-function UserProfile({ user }) {
-  const [favoriteMeals, setFavoriteMeals] = useState([]);
-
-  useEffect(() => {
-    setFavoriteMeals(user.favoriteMeals);
-  }, [user.favoriteMeals]);
+function UserProfile() {
+  const { user } = useUser();
 
   return (
     <React.Fragment>
@@ -25,8 +22,8 @@ function UserProfile({ user }) {
         flexWrap="wrap"
         gap={4}
       >
-        {favoriteMeals.map((favorite) => (
-          <MealPreview recipe={favorite} />
+        {user.favoriteMeals.map((favorite) => (
+          <MealPreview key={favorite._id} recipe={favorite} />
         ))}
       </Flex>
     </React.Fragment>

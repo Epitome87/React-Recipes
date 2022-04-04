@@ -53,28 +53,39 @@ function MealCategories() {
     fetchMealsFromCategory();
   }, [selectedCategory]);
 
+  const handleCategoriesOnClick = (event) => {
+    // We're already viewing a lot of Categories -- let's collapse some!
+    if (categoryCount > 6) {
+      setCategoryCount(6);
+    } else {
+      // We're not viewing very many Categories -- let's expand them!
+      setCategoryCount(CATEGORIES.length);
+    }
+  };
+
   const renderedSuggestionList = () => {
     if (!suggestedRecipes) return;
 
     return suggestedRecipes.map((recipe) => {
-      return <MealPreview key={recipe.id} recipe={recipe} />;
+      // We should use recipe.id if we are fetching from Spoonacular
+      return <MealPreview key={recipe._id} recipe={recipe} />;
     });
   };
 
   return (
     <Fragment>
       <Flex align="end" mt="10" mb="5">
-        <Heading as="h3">Meal Category</Heading>
+        <Heading as="h2" size="lg">
+          Meal Category
+        </Heading>
         <Spacer />
         <Link
           as={ReactLink}
           to="#"
           _hover={{ color: 'testYellow' }}
-          onClick={() => {
-            setCategoryCount(CATEGORIES.length);
-          }}
+          onClick={handleCategoriesOnClick}
         >
-          See All
+          {categoryCount > 6 ? 'Show Less' : 'Show All'}
         </Link>
       </Flex>
       <Flex
@@ -86,7 +97,7 @@ function MealCategories() {
       >
         {CATEGORIES.slice(0, categoryCount).map((category) => (
           <CategoryButton
-            key={category.id}
+            key={category.text}
             onClickHandler={setSelectedCategory}
             isSelected={category.id === selectedCategory}
             category={category}

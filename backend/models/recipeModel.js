@@ -6,7 +6,7 @@ const recipeSchema = mongoose.Schema(
     // The title of the recipe -- it is required!
     title: {
       type: String,
-      required: [true, 'Please enter a user name'],
+      required: [true, 'Please enter a recipe title'],
     },
     // The URL that stores the image that showcases the recipe
     image: {
@@ -28,6 +28,11 @@ const recipeSchema = mongoose.Schema(
       type: Number,
       min: 0,
       max: 5,
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+      ref: 'User',
     },
   },
   {

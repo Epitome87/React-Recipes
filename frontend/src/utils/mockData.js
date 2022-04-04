@@ -72,21 +72,21 @@ export const results = [
 // Mock users list
 export const users = [
   {
-    id: 1,
-    name: 'Davor',
+    _id: 1,
+    name: 'Caitlin',
     image:
       'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80',
     favoriteMeals: [results[0], results[1], results[2]],
   },
   {
-    id: 2,
-    name: 'Felix',
+    _id: 2,
+    name: 'Daniel',
     image:
       'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80',
     favoriteMeals: [results[0], results[1]],
   },
   {
-    id: 3,
+    _id: '62462cc3dec095aaf6d10dbc',
     name: 'Matt',
     image:
       'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80',

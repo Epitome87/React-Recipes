@@ -26,7 +26,7 @@ function ScreenUserProfile() {
 
   return (
     <Container maxW="container.xl" centerContent minH="93vh" bg="primary">
-      User Profile Screen for User ID {userId}
+      {/* User Profile Screen for User ID {userId} */}
       {user && <UserProfile user={user} />}
     </Container>
   );

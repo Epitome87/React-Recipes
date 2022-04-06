@@ -36,18 +36,20 @@ function MealCategories() {
     const fetchMealsFromCategory = async () => {
       const params = {};
       params.type = CATEGORIES[selectedCategory - 1].text.replace(' ', '');
-      // const fetchedRecipes = await getRecipe(params);
-      let fetchedRecipes = null;
+      params.number = 1;
+      const fetchedRecipes = await getRecipe(params);
+      console.log('fetched', fetchedRecipes);
+      // let fetchedRecipes = null;
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/recipes`);
-        fetchedRecipes = response.data;
+        // const response = await axios.get(`http://localhost:5000/api/recipes`);
+        // fetchedRecipes = response.data;
       } catch (error) {
         console.log('Error fetching recipes: ', error);
       }
 
       // TODO: How do we re-fetch when category chagnes using useFetch?
-      setSuggestedRecipes(fetchedRecipes);
+      setSuggestedRecipes(fetchedRecipes.results);
     };
 
     fetchMealsFromCategory();

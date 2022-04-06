@@ -89,7 +89,7 @@ function ScreenRecipe() {
       })
       .then()
       .catch();
-  }, isFavorite);
+  }, [isFavorite]);
 
   if (isLoading)
     return (

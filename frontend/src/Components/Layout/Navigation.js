@@ -2,10 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
 import {
+  CalendarOutlined,
+  FileSearchOutlined,
   HomeOutlined,
   SearchOutlined,
-  FileSearchOutlined,
-  CalendarOutlined,
 } from '@ant-design/icons';
 import { motion } from 'framer-motion';
 

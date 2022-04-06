@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { MealPreview } from '../../Meal';
 import { Flex, Heading, Image, Text } from '@chakra-ui/react';
-import { useUser } from '../../../Contexts/UserContext';
+// import { useUser } from '../../../Contexts/UserContext';
+import axios from 'axios';
 
 function UserProfile() {
-  const { user } = useUser();
+  // const { user } = useUser();
+  const [user, setUser] = useState();
+  const { id } = useParams();
+
+  const fetchUser = async () => {
+    const res = axios.get(`http://localhost:5000/api/users/${id}`);
+    const data = await res.data;
+    setUser(data);
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/users/${id}`)
+      .then((res) => res.data)
+      .then((data) => setUser(data));
+  }, []);
+
+  console.log(user);
 
   return (
     <React.Fragment>

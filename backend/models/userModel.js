@@ -52,6 +52,11 @@ const userSchema = mongoose.Schema(
         ref: 'Recipe',
       },
     ],
+    favoriteSpoonacularMeals: [
+      { 
+        type: String,
+      }
+    ]
   },
   {
     timestamps: true,

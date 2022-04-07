@@ -3,27 +3,50 @@ import { useParams } from 'react-router-dom';
 import { MealPreview } from '../../Meal';
 import { Flex, Heading, Image, Text } from '@chakra-ui/react';
 // import { useUser } from '../../../Contexts/UserContext';
+import { getRecipeById } from '../../../api/recipeSearch';
 import axios from 'axios';
 
 function UserProfile() {
   // const { user } = useUser();
   const [user, setUser] = useState();
-  const { id } = useParams();
+  const { userId } = useParams();
 
-  const fetchUser = async () => {
-    const res = axios.get(`http://localhost:5000/api/users/${id}`);
-    const data = await res.data;
-    setUser(data);
-  };
+  const [spoonacularFavorites, setSpoonacularFavorites] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/users/${id}`)
-      .then((res) => res.data)
-      .then((data) => setUser(data));
+    async function getUserFromBackend() {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/users/${userId}`
+        );
+
+        console.log('IN USERPROFILEPAGE', response.data.user);
+        const userData = await response.data.user;
+        console.log('SIGH', userData);
+
+        for (let i = 0; i < userData.favoriteSpoonacularMeals.length; i++) {
+          const test = await getRecipeById(
+            userData.favoriteSpoonacularMeals[i]
+          );
+          setSpoonacularFavorites((favs) => [...favs, test]);
+        }
+        setUser(userData);
+        console.log(spoonacularFavorites);
+        console.log('IN USERPROFILEPAGE', response.data.user);
+      } catch (error) {
+        console.log('Error fetching user: ', error);
+      }
+    }
+
+    getUserFromBackend();
   }, []);
 
   console.log(user);
+  console.log('SPOONS: ', spoonacularFavorites);
+
+  if (!user) {
+    return <div>Loading User...</div>;
+  }
 
   return (
     <React.Fragment>
@@ -34,6 +57,9 @@ function UserProfile() {
       <Text mt={10} mb={5} fontSize={'1.5rem'}>
         Favorite Meals ({user.favoriteMeals.length})
       </Text>
+      <Text mt={10} mb={5} fontSize={'1.5rem'}>
+        Favorite Spoonacular Meals ({user.favoriteSpoonacularMeals.length})
+      </Text>
       <Flex
         justifyContent="space-around"
         direction="row"
@@ -43,6 +69,17 @@ function UserProfile() {
       >
         {user.favoriteMeals.map((favorite) => (
           <MealPreview key={favorite._id} recipe={favorite} />
+        ))}
+      </Flex>
+      <Flex
+        justifyContent="space-around"
+        direction="row"
+        align="center"
+        flexWrap="wrap"
+        gap={4}
+      >
+        {spoonacularFavorites.map((favorite) => (
+          <MealPreview key={favorite._id} recipe={favorite} isSpoon={true} />
         ))}
       </Flex>
     </React.Fragment>

@@ -15,7 +15,9 @@ function ScreenUserProfile() {
           `http://localhost:5000/api/users/${userId}`
         );
 
-        setUser(response.data);
+        console.log('IN USERPROFILEPAGE', response.data.user);
+        const userData = await response.data.user;
+        setUser(userData);
       } catch (error) {
         console.log('Error fetching user: ', error);
       }

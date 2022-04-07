@@ -41,6 +41,26 @@ function ScreenRecipe() {
   // Temporary state: This will actually come from a database
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const [user, setUser] = useState();
+
+  const getUser = async () => {
+    const response = await axios.get(
+      `http://localhost:5000/api/users/6238f35214df56abcd11c983`
+    );
+
+    console.log('IN USERPROFILEPAGE', response.data.user);
+    const userData = await response.data.user;
+    setUser(userData);
+
+    if (userData.favoriteSpoonacularMeals.some((meal) => meal === recipeId)) {
+      console.log('This meal is a favorite already!');
+      setIsFavorite(true);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
   const toast = useToast();
 
   const handleFavoriteOnClick = (event) => {

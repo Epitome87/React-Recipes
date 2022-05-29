@@ -48,10 +48,12 @@ const updateFavoriteMeals = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
   // If this meal isn't a Favorite, make sure it's not in favoriteMeals list
-  user.favoriteMeals.forEach((meal) => console.log('ID', meal._id.toString()));
+  // user.favoriteMeals.forEach((meal) => console.log('ID', meal._id.toString()));
+  // We need to store a meal with a separate ID from the ones Mongo gives us -- needs to match their Spoonacular ID
   if (!isFavorite) {
-    user.favoriteMeals = user.favoriteMeals.filter(
-      (meal) => meal._id.toString() !== mealID
+    user.favoriteSpoonacularMeals = user.favoriteSpoonacularMeals.filter(
+      // (meal) => meal._id.toString() !== mealID
+      (meal) =>  meal !== mealID
     );
 
     await user.save();
@@ -59,11 +61,11 @@ const updateFavoriteMeals = asyncHandler(async (req, res) => {
   }
 
   // But if the Meal is to be a Favorite, add it!
-  if (user.favoriteMeals.some((meal) => meal._id.toString() === mealID)) {
+  if (user.favoriteSpoonacularMeals.some((meal) => meal === mealID)) {
     // Meal is already in favorite list!
     return res.status(200).json({ user });
   } else {
-    user.favoriteMeals.push(mealID);
+    user.favoriteSpoonacularMeals.push(mealID);
     await user.save();
     res.status(200).json({ user });
   }

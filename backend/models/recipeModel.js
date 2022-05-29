@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 // Defines the shape of a Recipe model
 const recipeSchema = mongoose.Schema(
   {
+    spoonacularID: {
+      type: String,
+    },
     // The title of the recipe -- it is required!
     title: {
       type: String,

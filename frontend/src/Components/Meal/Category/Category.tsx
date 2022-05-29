@@ -33,14 +33,14 @@ const MealCategories: React.FC = () => {
       let fetchedRecipes = null;
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/recipes`);
-        fetchedRecipes = response.data;
+        // const response = await axios.get(`http://localhost:5000/api/recipes`);
+        // fetchedRecipes = response.data;
       } catch (error) {
         console.log('Error fetching recipes: ', error);
       }
 
       // TODO: How do we re-fetch when category chagnes using useFetch?
-      setSuggestedRecipes(fetchedRecipes);
+      setSuggestedRecipes(fetchedRecipes.results);
     };
 
     fetchMealsFromCategory();

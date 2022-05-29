@@ -2,21 +2,33 @@ import React from 'react';
 import { Button, Text } from '@chakra-ui/react';
 import { CATEGORIES } from '../../../../utils/mockData';
 
-function CategoryButton({
+interface Category {
+  id: number;
+  text: string;
+  icon: string;
+}
+
+interface CategoryButtonProps {
+  category: Category;
+  isSelected: boolean;
+  onClickHandler(id: number): void;
+}
+
+const CategoryButton: React.FC<CategoryButtonProps> = ({
   category = CATEGORIES[2],
   isSelected = false,
-  onClickHandler = null,
-}) {
+  onClickHandler,
+}) => {
   const { id, text, icon } = category;
 
   return (
     <Button
-      width="150px"
+      width='150px'
       bg={isSelected ? 'testYellow' : 'secondary'}
       color={isSelected ? 'secondary' : 'white'}
-      letterSpacing="1px"
-      borderRadius="xl"
-      fontSize="12px"
+      letterSpacing='1px'
+      borderRadius='xl'
+      fontSize='12px'
       _hover={{
         color: 'secondary',
         bg: 'testYellow',
@@ -29,10 +41,10 @@ function CategoryButton({
       }}
       onClick={() => onClickHandler(id)}
     >
-      <Text fontSize="18px">{icon}</Text>
+      <Text fontSize='18px'>{icon}</Text>
       <Text ml={3}>{text.toUpperCase()}</Text>
     </Button>
   );
-}
+};
 
 export default CategoryButton;

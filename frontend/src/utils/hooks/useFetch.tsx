@@ -6,9 +6,9 @@ memoize this hook? I had some problems with to many request with this approach. 
 have some better idea how to handle this instead of passing method? Maybe some switch 
 statement here, but problem is when you need to pass helper fn with arguments like recipe_id */
 
-export function useFetch(url) {
-  const [data, setData] = useState();
-  const [error, setError] = useState();
+export function useFetch(url: string) {
+  const [data, setData] = useState<any>();
+  const [error, setError] = useState<any>();
 
   useEffect(() => {
     if (!url) return;

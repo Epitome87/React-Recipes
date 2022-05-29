@@ -20,17 +20,17 @@ const Error = lazy(() => import('./Pages/Error'));
 function App() {
   return (
     <UserProvider>
-      <Box maxW="1200px" bg="#28282B" h="100%" mx="auto">
+      <Box maxW='1200px' bg='#28282B' h='100%' mx='auto'>
         <Suspense fallback={<React.Fragment>Loading...</React.Fragment>}>
           <Router>
             <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/search/:query" element={<Search />} />
-              <Route path="/recipes" element={<Recipes />} />
-              <Route path="/recipes/:recipeId" element={<Recipe />} />
-              <Route path="/users/:userId" element={<UserProfile />} />
-              <Route path="*" element={<Error />} />
+              <Route path='/' element={<Landing />} />
+              <Route path='/search' element={<Search />} />
+              <Route path='/search/:query' element={<Search />} />
+              <Route path='/recipes' element={<Recipes />} />
+              <Route path='/recipes/:recipeId' element={<Recipe />} />
+              <Route path='/users/:userId' element={<UserProfile />} />
+              <Route path='*' element={<Error />} />
             </Routes>
             <Navigation />
           </Router>

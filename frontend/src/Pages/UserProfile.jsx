@@ -11,9 +11,7 @@ function ScreenUserProfile() {
   useEffect(() => {
     async function getUserFromBackend() {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/users/${userId}`
-        );
+        const response = await axios.get(`http://localhost:5000/api/users/${userId}`);
 
         setUser(response.data);
       } catch (error) {
@@ -25,8 +23,10 @@ function ScreenUserProfile() {
   }, []);
 
   return (
-    <Container maxW="container.xl" centerContent minH="93vh" bg="primary">
-      User Profile Screen for User ID {userId}
+    <Container maxW='container.xl' centerContent minH='93vh' bg='primary'>
+      {/* It's okay we're passing user down here. This user isn't the one we are storing in our global Context! */}
+      {/* If we didn't pass it down here, we'd have to re-fetch this User info from our server in each child component */}
+      {/* Or perhaps we can look into global state for fetched users */}
       {user && <UserProfile user={user} />}
     </Container>
   );

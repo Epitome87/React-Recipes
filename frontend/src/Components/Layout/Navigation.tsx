@@ -1,30 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
-import {
-  HomeOutlined,
-  SearchOutlined,
-  FileSearchOutlined,
-  CalendarOutlined,
-} from '@ant-design/icons';
+import { HomeOutlined, SearchOutlined, FileSearchOutlined, CalendarOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
 
-function Navigation() {
+const Navigation: React.FC = () => {
   return (
     <Flex
       sx={{
-        position: '-webkit-sticky',
-        /* Safari */ position: 'sticky',
+        position: 'sticky',
         bottom: '0',
       }}
-      //   bg="#2c2c2c"
-      bgColor="primary"
-      h="5rem"
-      fontSize="1.5rem"
+      bgColor='primary'
+      h='5rem'
+      fontSize='1.5rem'
       //   borderTopRightRadius="2rem"
       //   borderTopLeftRadius="2rem"
-      alignItems="center"
-      justifyContent="space-evenly"
+      alignItems='center'
+      justifyContent='space-evenly'
     >
       <motion.div
         whileHover={{
@@ -33,7 +26,7 @@ function Navigation() {
         }}
         whileTap={{ scale: 0.9 }}
       >
-        <NavLink to="/">
+        <NavLink to='/'>
           <HomeOutlined />
         </NavLink>
       </motion.div>
@@ -44,7 +37,7 @@ function Navigation() {
         }}
         whileTap={{ scale: 0.9 }}
       >
-        <NavLink to="/search">
+        <NavLink to='/search'>
           <SearchOutlined />
         </NavLink>
       </motion.div>
@@ -55,7 +48,7 @@ function Navigation() {
         }}
         whileTap={{ scale: 0.9 }}
       >
-        <NavLink to="/recipes">
+        <NavLink to='/recipes'>
           <FileSearchOutlined />
         </NavLink>
       </motion.div>
@@ -66,12 +59,12 @@ function Navigation() {
         }}
         whileTap={{ scale: 0.9 }}
       >
-        <NavLink to="/test">
+        <NavLink to='/test'>
           <CalendarOutlined />
         </NavLink>
       </motion.div>
     </Flex>
   );
-}
+};
 
 export default Navigation;

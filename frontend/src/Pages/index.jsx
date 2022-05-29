@@ -7,13 +7,4 @@ import Search from './Search';
 import Test from './Test';
 import UserProfile from './UserProfile';
 
-export {
-  Categories,
-  ErrorPage,
-  Landing,
-  Recipe,
-  Recipes,
-  Search,
-  Test,
-  UserProfile,
-};
+export { Categories, ErrorPage, Landing, Recipe, Recipes, Search, Test, UserProfile };

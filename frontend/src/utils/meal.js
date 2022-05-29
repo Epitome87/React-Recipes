@@ -14,8 +14,7 @@ export const recommendedMealCategory = () => {
 
 // Helper that determines which greeting message to present to the user
 export const greetingMessage = () => {
-  if (timeHelper.isBreakfastTime())
-    return 'Get your day started with a nice breakfast!';
+  if (timeHelper.isBreakfastTime()) return 'Get your day started with a nice breakfast!';
   if (timeHelper.isLunchTime()) return 'Ready to cook for dinner?';
   if (timeHelper.isDessertTime()) return 'Indulge in some dessert!';
 

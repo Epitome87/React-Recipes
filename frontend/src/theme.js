@@ -15,7 +15,7 @@ const theme = extendTheme({
         fontSize: ['30px !important', '42px !important'],
       },
       h2: {
-        fontSize: ['26px !important', '38px !important'],
+        fontSize: ['26px', '38px'],
       },
       h3: {
         fontSize: ['16px !important', '28px !important'],

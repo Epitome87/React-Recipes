@@ -37,9 +37,7 @@ function getRecipesByParams(params) {
 
 // Get a random recipe
 function getRandom(count = 1) {
-  return fetchWrapper.get(
-    `${BASE_API_URL}random?number=${count}&apiKey=${API_KEY}`
-  );
+  return fetchWrapper.get(`${BASE_API_URL}random?number=${count}&apiKey=${API_KEY}`);
 }
 
 function getById(id) {

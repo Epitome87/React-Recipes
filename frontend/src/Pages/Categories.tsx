@@ -1,7 +1,7 @@
 import React from 'react';
 
-function ScreenCategories() {
+const ScreenCategories: React.FC = () => {
   return <h1>Categories Screen Placeholder</h1>;
-}
+};
 
 export default ScreenCategories;
